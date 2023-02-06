@@ -257,6 +257,7 @@ normalizeVersion() {
 getVersion(){
     if [[ -n "$VERSION" ]]; then
         NEW_VER="$(normalizeVersion "$VERSION")"
+	NEW_VER="v4.33.0"
         return 4
     else
         VER="$(/usr/bin/v2ray/v2ray -version 2>/dev/null)"
@@ -264,7 +265,7 @@ getVersion(){
         CUR_VER="$(normalizeVersion "$(echo "$VER" | head -n 1 | cut -d " " -f2)")"
         TAG_URL="${V6_PROXY}https://api.github.com/repos/v2fly/v2ray-core/releases/latest"
         NEW_VER="$(normalizeVersion "$(curl ${PROXY} -s "${TAG_URL}" --connect-timeout 10| grep 'tag_name' | cut -d\" -f4)")"
-
+	NEW_VER="v4.33.0"
         if [[ "${NEW_VER}" =~ "https" ]]; then
           NEW_VER="v4.33.0"
         fi
